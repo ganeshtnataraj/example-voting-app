@@ -24,22 +24,23 @@ pipeline {
 
         stage('Checkout Code') {
             steps {
-                script {
-                    def ref = params.BRANCH_NAME ?: 'feature_b_example-voting-app'
-                    echo "Checking out Git ref: ${ref}"
-                    
-                    // Option 1: Use direct branch reference
-                    checkout([
-                        $class: 'GitSCM',
-                        branches: [[name: "refs/heads/${ref}"]], // Force using refs/heads/
-                        userRemoteConfigs: [[
-                            url: 'git@github.com:ganeshtnataraj/example-voting-app.git',
-                            credentialsId: 'github-ssh-key-id'
-                        ]]
-                    ])
-                    
-                    env.SHORT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
-                    echo "Checked out commit: ${env.SHORT_COMMIT}"
+                dir('vote') {
+                    script {
+                        def ref = params.BRANCH_NAME ?: 'feature_b_example-voting-app'
+                        echo "Checking out Git ref: ${ref}"
+
+                        checkout([
+                            $class: 'GitSCM',
+                            branches: [[name: ref.startsWith('refs/') ? ref : "*/${ref}"]],
+                            userRemoteConfigs: [[
+                                url: 'git@github.com:ganeshtnataraj/hello-app.git',
+                                credentialsId: 'github-ssh-key-id'
+                            ]]
+                        ])
+
+                        env.SHORT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                        echo "Checked out commit: ${env.SHORT_COMMIT}"
+                    }
                 }
             }
         }
