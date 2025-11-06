@@ -1,0 +1,4 @@
+imagepullsecrets: 'registrypullsecret' 
+dockerhub: 'docker.io'
+namespace: 'test'
+repository: 'ganeshtn91/voting-app'
