@@ -22,26 +22,24 @@ pipeline {
 
     stages {
 
-        stage('Verify GitHub SSH') {
-            steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'github-ssh-key-id', keyFileVariable: 'SSH_KEY')]) {
-                    sh '''
-                        echo "Testing GitHub SSH connection..."
-                        chmod 600 $SSH_KEY
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no git@github.com || true
-                    '''
-                }
-            }
-        }
-        
-        stage('git short commit extract') {
+        stage('Checkout Code') {
             steps {
                     script {
-                        
+                        def ref = params.BRANCH_NAME ?: 'feature_b_example-voting-app'
+                        echo "Checking out Git ref: ${ref}"
+
+                        checkout([
+                            $class: 'GitSCM',
+                            branches: [[name: ref.startsWith('refs/') ? ref : "*/${ref}"]],
+                            userRemoteConfigs: [[
+                                url: 'git@github.com:ganeshtnataraj/hello-app.git',
+                                credentialsId: 'github-ssh-key-id'
+                            ]]
+                        ])
+
                         env.SHORT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
                         echo "Checked out commit: ${env.SHORT_COMMIT}"
                     }
-                
             }
         }
 
