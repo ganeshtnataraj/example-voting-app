@@ -11,10 +11,6 @@ pipeline {
 
     agent any
 
-    parameters {
-        string(name: 'BRANCH_NAME', defaultValue: 'feature_b_example-voting-app', description: 'Git branch to build')
-    }
-
     environment {
         IMAGE_NAME = "ganeshtn91/voting-app" // Docker image name
         KUBECONFIG_FILE = credentials('kubeconfig-file')
