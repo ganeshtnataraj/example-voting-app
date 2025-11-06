@@ -23,7 +23,7 @@ pipeline {
                 script {
                     env.SHORT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
                     echo "Checked out commit: ${env.SHORT_COMMIT}"
-                    currentBuild.displayName = "BRANCH: ${env.BRANCH_NAME ?: 'main'} | COMMIT: ${env.SHORT_COMMIT}"
+                    currentBuild.displayName = "BRANCH: ${env.BRANCH_NAME ?: 'feature_b_example-voting-app'} | COMMIT: ${env.SHORT_COMMIT}"
                 }
             }
         }
@@ -80,10 +80,10 @@ pipeline {
     }
 
     post {
-        always {
+        /*always {
             echo "Cleaning workspace..."
             cleanWs()
-        }
+        }*/
         success {
             echo "voting app deployed completed successfully ✅"
         }
