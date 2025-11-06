@@ -72,7 +72,7 @@ pipeline {
                         export PATH=/usr/local/bin:$PATH
                         docker --version
                         echo "Building Docker image..."
-                        docker build -t ${env.IMAGE_NAME}:${env.SHORT_COMMIT} ./vote/Dockerfile .
+                        docker build -t ${env.IMAGE_NAME}:${env.SHORT_COMMIT} ./vote
                     """
                     echo "Docker Image Built: ${env.IMAGE_NAME}:${env.SHORT_COMMIT}"
                 }
