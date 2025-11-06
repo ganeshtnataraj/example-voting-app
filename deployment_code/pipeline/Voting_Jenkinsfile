@@ -33,7 +33,7 @@ pipeline {
                             $class: 'GitSCM',
                             branches: [[name: ref.startsWith('refs/') ? ref : "*/${ref}"]],
                             userRemoteConfigs: [[
-                                url: 'git@github.com:ganeshtnataraj/hello-app.git',
+                                url: 'git@github.com:ganeshtnataraj/example-voting-app.git',
                                 credentialsId: 'github-ssh-key-id'
                             ]]
                         ])
