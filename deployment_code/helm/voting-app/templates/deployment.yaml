@@ -22,3 +22,10 @@ spec:
         ports:
         - containerPort: 80
           name: {{ .Release.Name }}
+        resources:
+          requests:
+            cpu: 50m       # 0.1 CPU core
+            memory: 64Mi   # 128 MB memory
+          limits:
+            cpu: 50m       # 0.2 CPU core
+            memory: 128Mi   # 256 MB memory
