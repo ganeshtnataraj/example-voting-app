@@ -12,7 +12,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'BRANCH_NAME', defaultValue: '', description: 'Git branch to build')
+        string(name: 'BRANCH_NAME', defaultValue: 'feature_b_example-voting-app', description: 'Git branch to build')
     }
 
     environment {
@@ -21,7 +21,7 @@ pipeline {
     }
 
     stages {
-        
+
         stage("Build Name") {
             steps {
                 script {
