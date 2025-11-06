@@ -34,15 +34,14 @@ pipeline {
             }
         }
         
-        stage('Checkout Code') {
+        stage('git short commit extract') {
             steps {
-                dir('vote') {
                     script {
                         
                         env.SHORT_COMMIT = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
                         echo "Checked out commit: ${env.SHORT_COMMIT}"
                     }
-                }
+                
             }
         }
 
