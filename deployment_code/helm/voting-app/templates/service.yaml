@@ -1,21 +1,15 @@
----
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-service 
-  namespace: {{ .Values.namespace }}
   labels:
     app: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: Helm  
+  name: {{ .Release.Name }}
 spec:
+  type: NodePort
   ports:
-  - name: http-{{ .Release.Name }}
-    protocol: TCP 
-    port: {{ .Values.http.port }}
-    targetPort: {{ .Values.http.targetport }}
-  - name: https-{{ .Release.Name }}
-    protocol: TCP
-    port: {{ .Values.https.port }}
-    targetPort: {{ .Values.https.targetport }}
+  - name: "vote-service"
+    port: 8081
+    targetPort: 80
+    nodePort: 31000
   selector:
     app: {{ .Release.Name }}
