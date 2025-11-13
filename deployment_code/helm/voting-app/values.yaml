@@ -2,3 +2,10 @@ imagepullsecrets: 'registrypullsecret'
 dockerhub: 'docker.io'
 namespace: 'test'
 repository: 'ganeshtn91/voting-app'
+enable: false
+http:
+  port: 80
+  targetport: 80
+https:
+  port: 443
+  targetport: 80

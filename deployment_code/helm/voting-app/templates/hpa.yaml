@@ -1,3 +1,4 @@
+{{- if .Values.enable }}
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
@@ -24,3 +25,4 @@ spec:
         target:
           type: Utilization
           averageUtilization: 75   # target 75% memory usage
+{{- end }}
