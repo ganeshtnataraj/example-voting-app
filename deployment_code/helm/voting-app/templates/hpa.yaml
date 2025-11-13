@@ -17,10 +17,10 @@ spec:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 5   # target 70% CPU usage
+          averageUtilization: 70   # target 70% CPU usage
     - type: Resource
       resource:
         name: memory
         target:
           type: Utilization
-          averageUtilization: 5   # target 75% memory usage
+          averageUtilization: 75   # target 75% memory usage
